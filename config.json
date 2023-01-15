@@ -1,7 +1,12 @@
 {
-    "imgFileName": "/home/lab37/rtspImg.jpg",
-    "mqttServer": "127.0.0.1:1883",
-    "mqttUserName": "lab37",
-    "mqttPassword": "142857",
-    "ffmpegScriptFile": "/home/lab37/check_ff_mp_eg_live.sh"
+    "imgFileName": "F:\\tools\\ffmpeg\\rtsp.jpg",
+    "mqttServer": "192.168.1.196:1883",
+    "mqttUserName": "admin",
+    "mqttPassword": "p@ssW0rd",
+    "mqttSubTopic": "homeassistant/security/gate/motion",
+    "mqttPubTopic": "homeassistant/camera/facerec",
+    "ffmpegScriptFile": "F:\\tools\\ffmpeg\\start-ffmpeg-for-30s.bat",
+    "faceFinder": "F:\\Program Files\\new-face-detect\\cascade\\facefinder",
+    "faceData": "F:\\Program Files\\new-face-detect\\face-data.json",
+    "testDataDir": "F:\\Program Files\\new-face-detect\\testdata"
 }

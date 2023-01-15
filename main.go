@@ -5,9 +5,7 @@ import (
 	"log"
 	"os/exec"
 	"time"
-
 	"flag"
-
 	"github.com/lucacasonato/mqtt"
 )
 
@@ -20,10 +18,10 @@ func main() {
 	var Config = loadConfig(configFilePath)
 	mqttClient := newMqttClient(Config.MQTTserver, Config.MQTTuserName, Config.MQTTpassword, "face-recognition")
 	// 订阅主题
-	mqttSubWithTimeout(mqttClient, `homeassistant/security/gate/motion`, 1*time.Second)
+	mqttSubWithTimeout(mqttClient, Config.MQTTsubTopic, 1*time.Second)
 
 	// 设置对应主题的处理函数
-	mqttClient.Handle(`homeassistant/security/gate/motion`, func(m mqtt.Message) {
+	mqttClient.Handle(Config.MQTTsubTopic, func(m mqtt.Message) {
 		log.Println("门口有人移动，准备推送门口摄像机视频信号")
 		cmd := exec.Command(Config.FFmpegScriptFile)
 		cmd.Run()
@@ -73,6 +71,6 @@ func main() {
 		}
 
 	}()
-	go countAndPublicName(nameQueue, mqttClient)
+	go countAndPublicName(nameQueue, mqttClient, Config.MQTTpubTopic)
 	select {}
 }

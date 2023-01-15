@@ -7,7 +7,7 @@ import (
 	"github.com/lucacasonato/mqtt"
 )
 
-func countAndPublicName(nameCh chan string, mqttClient *mqtt.Client) {
+func countAndPublicName(nameCh chan string, mqttClient *mqtt.Client, mqttPubTopic string) {
 
 	mqttTicker := time.NewTicker(time.Second * 2)
 	defer mqttTicker.Stop()
@@ -33,17 +33,17 @@ func countAndPublicName(nameCh chan string, mqttClient *mqtt.Client) {
 				if cAnonymousNum > 3 {
 					message = message + "有陌生人来了"
 					log.Println(message)
-					mqttPubWithTimeout(mqttClient, `homeassistant\camera\facerec`, message, 1*time.Second)
+					mqttPubWithTimeout(mqttClient, mqttPubTopic, message, 1*time.Second)
 				}
 			case nums > 0:
 				if cAnonymousNum > 3 {
 					message = message + "来了, 带着陌生人"
 					log.Println(message)
-					mqttPubWithTimeout(mqttClient, `homeassistant\camera\facerec`, message, 1*time.Second)
+					mqttPubWithTimeout(mqttClient, mqttPubTopic, message, 1*time.Second)
 				} else {
 					message = message + "来了"
 					log.Println(message)
-					mqttPubWithTimeout(mqttClient, `homeassistant\camera\facerec`, message, 1*time.Second)
+					mqttPubWithTimeout(mqttClient, mqttPubTopic, message, 1*time.Second)
 				}
 			}
 		}

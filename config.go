@@ -12,6 +12,8 @@ type ConfigST struct {
 	MQTTserver       string `json:"mqttServer"`
 	MQTTuserName     string `json:"mqttUserName"`
 	MQTTpassword     string `json:"mqttPassword"`
+	MQTTsubTopic     string `json:"mqttSubTopic"`
+	MQTTpubTopic     string `json:"mqttPubTopic"`
 	FFmpegScriptFile string `json:"ffmpegScriptFile"`
 	FaceFinder       string `json:"faceFinder"`
 	FaceData         string `json:"faceData"`

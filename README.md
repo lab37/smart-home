@@ -27,7 +27,7 @@ ESP8266（某宝10元), MAX98357 D2A音频放大器(某宝7元), 腔体扬声器
 ### 下面三个本程序的依赖库, 可以不用理会, 已经集成到本项目代码中。
 - 项目(https://github.com/esimov/pigo), golang库, 图片人脸检测库, 性能好, 用来筛选有人脸的照片交给人脸识别程序。
 - 项目(https://github.com/Kagami/go-face), golang库, 人脸识别程序, 识别出图片中的人脸是谁。
-- 项目(github.com/lucacasonato/mqtt), golang库, mqtt客户端。
+- 项目(http://github.com/lucacasonato/mqtt), golang库, mqtt客户端。
 
 
 ## 二、安装方法
@@ -115,14 +115,16 @@ ESP8266（某宝10元), MAX98357 D2A音频放大器(某宝7元), 腔体扬声器
 - 配置文件：config.json
     ```bash
     {
-        "imgFileName": "F:\\tools\\ffmpeg\\rtsp.jpg",  // 程序保存来客截图的位    置        
-        "mqttServer": "192.168.31.96:1883",   // mqtt服务器地址
-        "mqttUserName": "lab37",   // mqtt用户名
-        "mqttPassword": "142857",   // mqtt密码
-        "ffmpegScriptFile": "F:\\tools\\ffmpeg\\start-ffmpeg-for-30s.bat",  // mqtt有    客到来时启动的ffmpeg截图脚本(示例为本项目start-ffmpeg-for-30s.bat)。
-        "faceFinder": "F:\\Program Files\\new-face-detect\\cascade\\facefinder",  //     用于人脸检测的分类模型文件。
-        "faceData": "F:\\Program Files\\new-face-detect\\face-data.json",  // 人脸数据    库, 可由https://github.com/lab37/generate-face-128D-tools, 生成
-        "testDataDir": "F:\\Program Files\\new-face-detect\\testdata"  // 用于人脸识别    的模型文件夹。
+        "imgFileName": "F:\\tools\\ffmpeg\\rtsp.jpg",  # 程序保存来客截图的位置        
+        "mqttServer": "192.168.31.96:1883",   # mqtt服务器地址
+        "mqttUserName": "lab37",   # mqtt用户名
+        "mqttPassword": "142857",   # mqtt密码
+        "mqttSubTopic": "homeassistant/security/gate/motion",   #订阅的主题，用于订阅门口有人时multicast2mqtt发送的mqtt主题
+        "mqttPubTopic": "homeassistant/camera/facerec",       # 发布的主题， 用于在识别出人脸后发出的主题，附带的消息是一句文本，用于home-assistant接收后调用小爱同学的TTS播报出来。
+        "ffmpegScriptFile": "F:\\tools\\ffmpeg\\start-ffmpeg-for-30s.bat",  # mqtt有客到来时启动的ffmpeg截图脚本(示例为本项目start-ffmpeg-for-30s.bat)。
+        "faceFinder": "F:\\Program Files\\new-face-detect\\cascade\\facefinder",  #用于人脸检测的分类模型文件。
+        "faceData": "F:\\Program Files\\new-face-detect\\face-data.json",  # 人脸数据库, 可由https://github.com/lab37/generate-face-128D-tools  生成
+        "testDataDir": "F:\\Program Files\\new-face-detect\\testdata"  # 用于人脸识别的模型文件夹。github访问较慢也可从此处下载： https://www.aliyundrive.com/s/VQTwUeysrU3
     }
     ```
 - 运行环境配置
