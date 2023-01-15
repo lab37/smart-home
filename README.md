@@ -144,7 +144,7 @@ ESP8266（某宝10元), MAX98357 D2A音频放大器(某宝7元), 腔体扬声器
     sudo apt install libdlib-dev libblas-dev liblapack-dev libjpeg-turbo8-dev     libatlas-base-dev -y
     ```
 
-- 运行命令
+- 运行命令，可从本项目release页面下载编译好的可执行文件，也可从https://www.aliyundrive.com/s/xU3oRwRhryB  下载windows下的可执行程序。
     ```bash
     new-face-detect   -config   config.json
     ```
