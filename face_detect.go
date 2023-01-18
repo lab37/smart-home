@@ -51,7 +51,7 @@ func detectFace(classifier *pigo.Pigo, img image.Image) (numberOfFace int) {
 		// 根据各个人脸区域的交并比(IoU), 鉴别出有几张人脸.
 		dets2 := classifier.ClusterDetections(goodQ, 0.2)
 		if len(dets2) > 0 {
-			numberOfFace=len(dets2)
+			numberOfFace = len(dets2)
 			log.Println("来了", len(dets2), "个人")
 			elapsed := time.Since(start)
 			log.Printf("本次检测耗时: %s", elapsed)
@@ -66,7 +66,7 @@ func detectFace(classifier *pigo.Pigo, img image.Image) (numberOfFace int) {
 func getFaceDetectClassifier(modelPath string) (classifier *pigo.Pigo) {
 	cascadeFile, err := os.ReadFile(modelPath)
 	if err != nil {
-		log.Fatalln("什么狗FaceDetect模型路径, 读不了: ", err)
+		log.Panicln("什么狗FaceDetect模型路径, 读不了: ", err)
 	}
 
 	p := pigo.NewPigo()
@@ -76,7 +76,7 @@ func getFaceDetectClassifier(modelPath string) (classifier *pigo.Pigo) {
 	// the tree depth, the threshold and the prediction from tree's leaf nodes.
 	classifier, err = p.Unpack(cascadeFile)
 	if err != nil {
-		log.Fatalln("路径倒是没问题了，但这熊文件解析不了啊: ", err)
+		log.Panicln("路径倒是没问题了，但这熊文件解析不了啊: ", err)
 	}
 	return
 }

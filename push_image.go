@@ -14,7 +14,7 @@ import (
 func monitAndPutNewImgToChan(fileName string, imgQueue chan image.Image) {
 	watcher, err := fsnotify.NewWatcher()
 	if err != nil {
-		log.Fatal(err)
+		log.Panicln(err)
 	}
 	defer watcher.Close()
 
@@ -28,7 +28,7 @@ func monitAndPutNewImgToChan(fileName string, imgQueue chan image.Image) {
 	}
 	err = watcher.Add(fileName)
 	if err != nil {
-		log.Fatal(err)
+		log.Panicln(err)
 	}
 	for {
 		select {

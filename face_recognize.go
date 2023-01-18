@@ -103,8 +103,8 @@ func getFaceRecognizer(modelDir string, faceDescriptions []face.Descriptor) (rec
 
 	rec, err := face.NewRecognizer(modelsPath)
 	if err != nil {
-		log.Fatalln("人脸识别模型文件读不了,原因自己找去吧, 再见了宝贝儿:", err)
-		fileLogger.Fatalln("人脸识别模型文件读不了,原因自己找去吧, 再见了宝贝儿:", err)
+		log.Panicln("人脸识别模型文件读不了,原因自己找去吧, 再见了宝贝儿:", err)
+		fileLogger.Panicln("人脸识别模型文件读不了,原因自己找去吧, 再见了宝贝儿:", err)
 		return
 	}
 	var descriptorIndexs []int32
@@ -126,11 +126,11 @@ func loadFacesDatabase(databasePath string) (faces []face.Descriptor, names []st
 	var tmp []faceST
 	data, err := os.ReadFile(databasePath)
 	if err != nil {
-		log.Fatalln(err)
+		log.Panicln(err)
 	}
 	err = json.Unmarshal(data, &tmp)
 	if err != nil {
-		log.Fatalln(err)
+		log.Panicln(err)
 	}
 
 	for _, f := range tmp {

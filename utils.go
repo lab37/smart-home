@@ -66,11 +66,9 @@ func waitingSignal() {
 	for s := range c {
 		switch s {
 		case syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT:
-			fileLogger.Println("程序进程被结束...", s, ", 程序退出")
-			os.Exit(0)
+			fileLogger.Panicln("程序进程被结束...", s, ", 程序退出")
 		default:
-			fileLogger.Println("收到信号：", s, ", 程序退出")
-			os.Exit(0)
+			fileLogger.Panicln("收到信号：", s, ", 程序退出")
 		}
 	}
 
