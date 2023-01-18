@@ -222,7 +222,7 @@ ESP8266（某宝10元), MAX98357 D2A音频放大器(某宝7元), 腔体扬声器
       description: ''
       trigger:
       - platform: mqtt
-        topic: homeassistant\camera\facerec
+        topic: homeassistant/camera/facerec
       condition:
       - condition: time
         after: 07:00:00
