@@ -8,5 +8,6 @@
     "ffmpegScriptFile": "F:\\tools\\ffmpeg\\start-ffmpeg-for-30s.bat",
     "faceFinder": "F:\\Program Files\\new-face-detect\\cascade\\facefinder",
     "faceData": "F:\\Program Files\\new-face-detect\\face-data.json",
-    "testDataDir": "F:\\Program Files\\new-face-detect\\testdata"
+    "testDataDir": "F:\\Program Files\\new-face-detect\\testdata",
+	"logFilePath": "face-detect.log"
 }

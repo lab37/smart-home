@@ -2,6 +2,9 @@ package main
 
 import (
 	"log"
+	"os"
+	"os/signal"
+	"syscall"
 	"time"
 
 	"github.com/lucacasonato/mqtt"
@@ -30,23 +33,45 @@ func countAndPublicName(nameCh chan string, mqttClient *mqtt.Client, mqttPubTopi
 			}
 			switch {
 			case nums == 0:
-				if cAnonymousNum > 3 {
+				if cAnonymousNum > 2 {
 					message = message + "有陌生人来了"
 					log.Println(message)
+					fileLogger.Println(message)
 					mqttPubWithTimeout(mqttClient, mqttPubTopic, message, 1*time.Second)
 				}
 			case nums > 0:
-				if cAnonymousNum > 3 {
+				if cAnonymousNum > 2 {
 					message = message + "来了, 带着陌生人"
 					log.Println(message)
+					fileLogger.Println(message)
 					mqttPubWithTimeout(mqttClient, mqttPubTopic, message, 1*time.Second)
 				} else {
 					message = message + "来了"
 					log.Println(message)
+					fileLogger.Println(message)
 					mqttPubWithTimeout(mqttClient, mqttPubTopic, message, 1*time.Second)
 				}
 			}
 		}
 
 	}
+}
+
+func waitingSignal() {
+	c := make(chan os.Signal, 1)
+	//监听指定信号 ctrl+c kill
+	signal.Notify(c, syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM,
+		syscall.SIGQUIT)
+
+	for s := range c {
+		switch s {
+		case syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT:
+			fileLogger.Println("程序进程被结束...", s, ", 程序退出")
+			os.Exit(0)
+		default:
+			fileLogger.Println("收到信号：", s, ", 程序退出")
+			os.Exit(0)
+		}
+	}
+
 }

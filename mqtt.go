@@ -22,7 +22,8 @@ func newMqttClient(serverAddr string, username string, password string, clientID
 		AutoReconnect: true,
 	})
 	if err != nil {
-		log.Println("can not connect with mqttServer:", err)
+		log.Println("无法创建mqtt客户端:", err)
+		fileLogger.Println("无法创建mqtt客户端:", err)
 		panic(err)
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
@@ -30,7 +31,8 @@ func newMqttClient(serverAddr string, username string, password string, clientID
 	//如果在1s内建立了连接则返回nil, 不然就是超时错误了.
 	err = mqttClient.Connect(ctx)
 	if err != nil {
-		log.Println("can not connect with mqttServer:", err)
+		log.Println("连接mqttServer超时:", err)
+		fileLogger.Println("连接mqttServer超时:", err)
 		panic(err)
 	}
 	return mqttClient
@@ -41,7 +43,8 @@ func mqttPubWithTimeout(mqttClient *mqtt.Client, topic string, payload string, d
 	defer cancel()
 	err := mqttClient.PublishString(ctx, topic, payload, mqtt.AtLeastOnce)
 	if err != nil {
-		log.Println("failed to publish to config service:", err)
+		log.Println("发布mqtt主题失败:", err)
+		fileLogger.Println("发布mqtt主题失败:", err)
 	}
 }
 
@@ -50,7 +53,8 @@ func mqttSubWithTimeout(mqttClient *mqtt.Client, topic string, duration time.Dur
 	defer cancel()
 	err := mqttClient.Subscribe(ctx, topic, mqtt.AtMostOnce)
 	if err != nil {
-		log.Println("failed to subscribe to config service:", err)
+		log.Println("订阅mqtt主题失败:", err)
+		fileLogger.Println("订阅mqtt主题失败:", err)
 	}
 }
 

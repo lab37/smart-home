@@ -34,7 +34,8 @@ func monitAndPutNewImgToChan(fileName string, imgQueue chan image.Image) {
 		select {
 		case event, ok := <-watcher.Events:
 			if !ok {
-				log.Println("FileMonitor err", err)
+				log.Println("监控图片文件错误：", err)
+				fileLogger.Println("监控图片文件错误：", err)
 			}
 
 			if event.Op&fsnotify.Write == fsnotify.Write {
@@ -53,6 +54,7 @@ func monitAndPutNewImgToChan(fileName string, imgQueue chan image.Image) {
 					imgQueue <- img
 				} else {
 					log.Println("图片通道满了,已经", len(imgQueue), "张没处理了,无法往里放入新图片了")
+					fileLogger.Println("图片通道满了,已经", len(imgQueue), "张没处理了,无法往里放入新图片了")
 				}
 
 			}

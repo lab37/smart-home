@@ -65,7 +65,8 @@ func faceRec(rec *face.Recognizer, img image.Image, names []string) (results rec
 	rawImg := buf.Bytes()
 	cFaces, err := rec.Recognize(rawImg)
 	if err != nil {
-		log.Println("要识别的图片有问题啊大哥", err)
+		log.Println("要识别的图片文件有问题啊大哥", err)
+		fileLogger.Println("要识别的图片文件有问题啊大哥", err)
 		return
 	}
 	if len(cFaces) == 0 {
@@ -103,6 +104,7 @@ func getFaceRecognizer(modelDir string, faceDescriptions []face.Descriptor) (rec
 	rec, err := face.NewRecognizer(modelsPath)
 	if err != nil {
 		log.Fatalln("人脸识别模型文件读不了,原因自己找去吧, 再见了宝贝儿:", err)
+		fileLogger.Fatalln("人脸识别模型文件读不了,原因自己找去吧, 再见了宝贝儿:", err)
 		return
 	}
 	var descriptorIndexs []int32
@@ -147,7 +149,7 @@ func getFaceDescription(modelDir string, imagesPath string, numbers int) {
 
 	rec, err := face.NewRecognizer(modelsPath)
 	if err != nil {
-		log.Println("Can't init face recognizer:", err)
+		log.Println("无法加载人脸检测模型:", err)
 		return
 	}
 	defer rec.Close()

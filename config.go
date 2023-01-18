@@ -18,6 +18,7 @@ type ConfigST struct {
 	FaceFinder       string `json:"faceFinder"`
 	FaceData         string `json:"faceData"`
 	TestDataDir      string `json:"testDataDir"`
+	LogFilePath      string `json:"logFilePath"`
 }
 
 // 读取配置文件并生成附属结构
