@@ -124,7 +124,8 @@ ESP8266（某宝10元), MAX98357 D2A音频放大器(某宝7元), 腔体扬声器
         "ffmpegScriptFile": "F:\\tools\\ffmpeg\\start-ffmpeg-for-30s.bat",  # mqtt有客到来时启动的ffmpeg截图脚本(示例为本项目start-ffmpeg-for-30s.bat)。
         "faceFinder": "F:\\Program Files\\new-face-detect\\cascade\\facefinder",  #用于人脸检测的分类模型文件。
         "faceData": "F:\\Program Files\\new-face-detect\\face-data.json",  # 人脸数据库, 可由https://github.com/lab37/generate-face-128D-tools  生成
-        "testDataDir": "F:\\Program Files\\new-face-detect\\testdata"  # 用于人脸识别的模型文件夹。github访问较慢也可从此处下载： https://www.aliyundrive.com/s/VQTwUeysrU3
+        "testDataDir": "F:\\Program Files\\new-face-detect\\testdata",  # 用于人脸识别的模型文件夹。github访问较慢也可从此处下载： https://www.aliyundrive.com/s/VQTwUeysrU3
+        "logFilePath": "face-detect.log"    #日志文件
     }
     ```
 - 运行环境配置
